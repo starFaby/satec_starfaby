@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% import 'modal/modalCarnetAbogada.html' as macroModaCarAb %}
+{% import 'modal/clientModalPresentacionAbg.html' as macroModaPresAbg %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%}
+{% block content %}
+<div class="container">
+    {% if vmcarnet is true: %}
+    {{ macroModaCarAb.macroModalCarnetAbogada("Abogada Luz Estrella") }}
+    {% endif %}
+    {% if vmpresabg is true: %}
+    {{ macroModaPresAbg.adminModalPresentacionAbg("Abogada Luz Estrella") }}
+    {% endif %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row p-2">
+                <a href="{{ url_for('crs.onGetClientControllerPresentacionAbg')}}">
+                    <button class="buttonAnimate">
+                    Informacion Abogada
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    </button>
+                </a>
+            </div>
+            <div class="row p-2">
+                <a href="/crsc"><button class="buttonAnimate">
+                    Carnet Abogada
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button></a>
+            </div>
+            <div class="row p-2">
+                <a href="https://app.funcionjudicial.gob.ec/ForoAbogados/Publico/frmConsultasGenerales.jsp"
+                    target="_blank" rel="noopener noreferrer"><button class="buttonAnimate">
+                        Foro de abogados
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-5 p-4">
+            <img class="w-100 h-75 p-0" src="https://res.cloudinary.com/dpj9bxnhj/image/upload/v1725644903/logopantallaprincipal_zymrlj.gif" alt="">
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.google.com/maps/place/0%C2%B012'09.6%22S+78%C2%B029'37.8%22W/@-0.2028645,-78.493997,19z/data=!4m4!3m3!8m2!3d-0.2026674!4d-78.493828?entry=ttu"
+                target="_blank" rel="noopener noreferrer">
+                <img class="w-100"
+                    src="https://res.cloudinary.com/dvqgk49zn/image/upload/v1717429675/asistenteAbogado/ubication_a4vlfm.jpg"
+                    alt="">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <a href="https://drive.google.com/file/d/1jRNIlShVwx91UZg9MR370HMVgRyTEjU9/view?usp=sharing" target="_blank" rel="noopener noreferrer"><button class="btn btn-secondary"><span class="display-3">Imprima Su Descuento</span></button></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col  text-center ">
+            <span class="display-3"><strong></strong> </span>
+        </div>
+    </div>
+</div>
+{% block custom_scripts %}
+{% if (vmcarnet is true) or (vmpresabg is true)%}
+<script>
+    window.onload = function () {
+        $("#mcarnetabogada").modal("show");
+        $("#modpresenabg").modal("show");
+    } 
+</script>
+{% endif %}
+{% endblock %}
+{% endblock %}

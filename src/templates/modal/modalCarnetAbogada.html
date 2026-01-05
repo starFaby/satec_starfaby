@@ -1,0 +1,20 @@
+{% macro macroModalCarnetAbogada(title) %}
+<div class="modal" id="mcarnetabogada" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-2 fw-bolder" id="staticBackdropLabel">{{title}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="pull-right" id="exampleModalLabel">Matricula: <span>&nbsp;17-2022-525</span></h5>
+                <img class="w-100 h-75" src="https://res.cloudinary.com/dpj9bxnhj/image/upload/v1722265987/imgabgluz_mn9gjh.jpg" alt="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
