@@ -49,9 +49,24 @@ class User(db.Model):
     
     
 
-class UserSchema(ma.Schema):
+class UserSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfsusersid', 'pfsuserscedula', 'pfsusersnombres', 'pfsusersapellidos', 'pfsusersusername', 'pfsusersemail', 'pfsuserspassword', 'pfsusersdireccion',  'pfsuserscelular', 'pfsuserstelefono','pfsusersisadmin', 'pfsusersavatar', 'pfsusersestado', 'pfsuserscreatedat')
+        model = User
+        
+    pfsusersid = ma.auto_field()
+    pfsuserscedula = ma.auto_field()
+    pfsusersnombres = ma.auto_field()
+    pfsusersapellidos = ma.auto_field()
+    pfsusersusername = ma.auto_field()
+    pfsusersemail = ma.auto_field()
+    pfsuserspassword = ma.auto_field()
+    pfsusersdireccion = ma.auto_field()
+    pfsuserscelular = ma.auto_field()
+    pfsuserstelefono = ma.auto_field()
+    pfsusersisadmin = ma.auto_field()
+    pfsusersavatar = ma.auto_field()
+    pfsusersestado = ma.auto_field()
+    pfsuserscreatedat = ma.auto_field()
 
 userSchema = UserSchema()
 usersSchema = UserSchema(many=True)
@@ -67,20 +82,30 @@ class Region(db.Model):
     pfssatecregionnombre = db.Column(db.String(120), nullable=False)
     pfssatecregionimage = db.Column(db.String(300), nullable=False)
     pfssatecregiondetalle = db.Column(db.String(300), nullable=False)
+    pfssatecregionubicacion = db.Column(db.String(500), nullable=False)
     pfssatecregionestado = db.Column(db.String(1), nullable=True)
     pfssatecregioncreatedat = db.Column(db.String(11), nullable=True) 
 
 
-    def __init__(self, pfssatecregionnombre, pfssatecregionimage, pfssatecregiondetalle , pfssatecregionestado, pfssatecregioncreatedat):
+    def __init__(self, pfssatecregionnombre, pfssatecregionimage, pfssatecregiondetalle ,pfssatecregionubicacion, pfssatecregionestado, pfssatecregioncreatedat):
         self.pfssatecregionnombre = pfssatecregionnombre
         self.pfssatecregionimage = pfssatecregionimage
         self.pfssatecregiondetalle = pfssatecregiondetalle
+        self.pfssatecregionubicacion = pfssatecregionubicacion
         self.pfssatecregionestado = pfssatecregionestado
         self.pfssatecregioncreatedat = pfssatecregioncreatedat
 
-class RegionSchema(ma.Schema):
+class RegionSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfssatecregionid', 'pfssatecregionnombre', 'pfssatecregionimage', 'pfssatecregiondetalle' , 'pfssatecregionestado', 'pfssatecregioncreatedat')
+        model = Region
+
+    pfssatecregionid = ma.auto_field()
+    pfssatecregionnombre = ma.auto_field()
+    pfssatecregionimage = ma.auto_field()
+    pfssatecregiondetalle = ma.auto_field()
+    pfssatecregionubicacion = ma.auto_field()
+    pfssatecregionestado = ma.auto_field()
+    pfssatecregioncreatedat = ma.auto_field()
 
 regionSchema = RegionSchema()
 regionSchema = RegionSchema(many=True)
@@ -93,6 +118,8 @@ class Provincia(db.Model):
     pfssatecprovinciaid = db.Column(db.Integer, primary_key=True)
     pfssatecprovincianombre = db.Column(db.String(150), nullable=False)
     pfssatecprovinciaimage = db.Column(db.String(300), nullable=False)
+    pfssatecprovinciadetalle = db.Column(db.String(200), nullable=False)
+    pfssatecprovinciaubicacion = db.Column(db.String(500), nullable=False)
     pfssatecprovinciacodigo = db.Column(db.String(120), nullable=False)
     pfssatecprovinciaestado = db.Column(db.String(1), nullable=True)
     pfssatecprovinciacreatedat = db.Column(db.String(11), nullable=True) 
@@ -100,16 +127,28 @@ class Provincia(db.Model):
     pfssatecregionid = db.Column(db.Integer, db.ForeignKey('pfssatecregion.pfssatecregionid',ondelete='CASCADE'), nullable=False)
     pfssatecregion = db.relationship('Region',backref=db.backref('pfssatecprovincia',lazy=True))
 
-    def __init__(self, pfssatecprovincianombre,pfssatecprovinciaimage, pfssatecprovinciacodigo,pfssatecprovinciaestado, pfssatecprovinciacreatedat):
+    def __init__(self, pfssatecprovincianombre,pfssatecprovinciaimage,pfssatecprovinciadetalle, pfssatecprovinciaubicacion, pfssatecprovinciacodigo,pfssatecprovinciaestado, pfssatecprovinciacreatedat, pfssatecregionid):
         self.pfssatecprovincianombre = pfssatecprovincianombre
         self.pfssatecprovinciaimage = pfssatecprovinciaimage
+        self.pfssatecprovinciadetalle = pfssatecprovinciadetalle
+        self.pfssatecprovinciaubicacion = pfssatecprovinciaubicacion
         self.pfssatecprovinciacodigo = pfssatecprovinciacodigo
         self.pfssatecprovinciaestado = pfssatecprovinciaestado
         self.pfssatecprovinciacreatedat = pfssatecprovinciacreatedat
+        self.pfssatecregionid = pfssatecregionid
 
-class ProvinciaSchema(ma.Schema):
+class ProvinciaSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfssatecprovinciaid', 'pfssatecprovincianombre','pfssatecprovinciaimage', 'pfssatecprovinciacodigo', 'pfssatecprovinciaestado' , 'pfssatecprovinciacreatedat', 'pfssatecregionid')
+        model = Provincia
+
+    pfssatecprovinciaid = ma.auto_field()
+    pfssatecprovincianombre = ma.auto_field()
+    pfssatecprovinciaimage = ma.auto_field()
+    pfssatecprovinciadetalle = ma.auto_field()
+    pfssatecprovinciaubicacion = ma.auto_field()
+    pfssatecprovinciacodigo = ma.auto_field()
+    pfssatecprovinciaestado = ma.auto_field()
+    pfssatecprovinciacreatedat = ma.auto_field()
 
 provinciaSchema = ProvinciaSchema()
 provinciaSchema = ProvinciaSchema(many=True)
@@ -124,6 +163,8 @@ class Capital(db.Model):
     pfssateccapitalid = db.Column(db.Integer, primary_key=True)
     pfssateccapitalnombre = db.Column(db.String(150), nullable=False)
     pfssateccapitalimage = db.Column(db.String(300), nullable=False)
+    pfssateccapitaldetalle = db.Column(db.String(120), nullable=False)
+    pfssateccapitalubicacion = db.Column(db.String(500), nullable=False)
     pfssateccapitalcodigo = db.Column(db.String(120), nullable=False)
     pfssateccapitalestado = db.Column(db.String(1), nullable=True)
     pfssateccapitalcreatedat = db.Column(db.String(11), nullable=True) 
@@ -131,16 +172,28 @@ class Capital(db.Model):
     pfssatecprovinciaid = db.Column(db.Integer, db.ForeignKey('pfssatecprovincia.pfssatecprovinciaid',ondelete='CASCADE'), nullable=False)
     pfssatecprovincia = db.relationship('Provincia',backref=db.backref('pfssateccapital',lazy=True))
 
-    def __init__(self, pfssateccapitalnombre,pfssateccapitalimage, pfssateccapitalcodigo,pfssateccapitalestado, pfssateccapitalcreatedat):
+    def __init__(self, pfssateccapitalnombre,pfssateccapitalimage,pfssateccapitaldetalle,pfssateccapitalubicacion, pfssateccapitalcodigo,pfssateccapitalestado, pfssateccapitalcreatedat, pfssatecprovinciaid):
         self.pfssateccapitalnombre = pfssateccapitalnombre
         self.pfssateccapitalimage = pfssateccapitalimage
+        self.pfssateccapitaldetalle = pfssateccapitaldetalle
+        self.pfssateccapitalubicacion = pfssateccapitalubicacion
         self.pfssateccapitalcodigo = pfssateccapitalcodigo
         self.pfssateccapitalestado = pfssateccapitalestado
         self.pfssateccapitalcreatedat = pfssateccapitalcreatedat
+        self.pfssatecprovinciaid = pfssatecprovinciaid
 
-class CapitalSchema(ma.Schema):
+class CapitalSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfssateccapitalid', 'pfssateccapitalnombre','pfssateccapitalimage', 'pfssateccapitalcodigo', 'pfssateccapitalestado' , 'pfssateccapitalcreatedat', 'pfssatecprovinciaid')
+        model = Capital
+
+    pfssateccapitalid = ma.auto_field()
+    pfssateccapitalnombre = ma.auto_field()
+    pfssateccapitalimage = ma.auto_field()
+    pfssateccapitaldetalle = ma.auto_field()
+    pfssateccapitalubicacion = ma.auto_field()
+    pfssateccapitalcodigo = ma.auto_field()
+    pfssateccapitalestado = ma.auto_field()
+    pfssateccapitalcreatedat = ma.auto_field()
 
 capitalSchema = CapitalSchema()
 capitalSchema = CapitalSchema(many=True)
@@ -155,6 +208,8 @@ class Canton(db.Model):
     pfssateccantonid = db.Column(db.Integer, primary_key=True)
     pfssateccantonnombre = db.Column(db.String(150), nullable=False)
     pfssateccantonimage = db.Column(db.String(300), nullable=False)
+    pfssateccantondetalle = db.Column(db.String(120), nullable=False)
+    pfssateccantonubicacion = db.Column(db.String(500), nullable=False)
     pfssateccantoncodigo = db.Column(db.String(120), nullable=False)
     pfssateccantonestado = db.Column(db.String(1), nullable=True)
     pfssateccantoncreatedat = db.Column(db.String(11), nullable=True) 
@@ -162,16 +217,28 @@ class Canton(db.Model):
     pfssateccapitalid = db.Column(db.Integer, db.ForeignKey('pfssateccapital.pfssateccapitalid',ondelete='CASCADE'), nullable=False)
     pfssateccapital = db.relationship('Capital',backref=db.backref('pfssateccanton',lazy=True))
 
-    def __init__(self, pfssateccantonnombre,pfssateccantonimage, pfssateccantoncodigo,pfssateccantonestado, pfssateccantoncreatedat):
+    def __init__(self, pfssateccantonnombre,pfssateccantonimage, pfssateccantoncodigo,pfssateccantondetalle,pfssateccantonubicacion,pfssateccantonestado, pfssateccantoncreatedat, pfssateccapitalid):
         self.pfssateccantonnombre = pfssateccantonnombre
         self.pfssateccantonimage = pfssateccantonimage
+        self.pfssateccantondetalle = pfssateccantondetalle
+        self.pfssateccantonubicacion = pfssateccantonubicacion
         self.pfssateccantoncodigo = pfssateccantoncodigo
         self.pfssateccantonestado = pfssateccantonestado
         self.pfssateccantoncreatedat = pfssateccantoncreatedat
+        self.pfssateccapitalid = pfssateccapitalid
 
-class CantonSchema(ma.Schema):
+class CantonSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfssateccantonid', 'pfssateccantonnombre','pfssateccantonimage', 'pfssateccantoncodigo', 'pfssateccantonestado' , 'pfssateccantoncreatedat', 'pfssateccapitalid')
+        model = Canton 
+    
+    pfssateccantonid = ma.auto_field()
+    pfssateccantonnombre = ma.auto_field()
+    pfssateccantonimage = ma.auto_field()
+    pfssateccantondetalle = ma.auto_field()
+    pfssateccantonubicacion = ma.auto_field()
+    pfssateccantoncodigo = ma.auto_field()
+    pfssateccantonestado = ma.auto_field()
+    pfssateccantoncreatedat = ma.auto_field()
 
 cantonSchema = CantonSchema()
 cantonSchema = CantonSchema(many=True)
@@ -196,9 +263,15 @@ class Tipozona(db.Model):
         self.pfssatectipozonaestado = pfssatectipozonaestado
         self.pfssatectipozonacreatedat = pfssatectipozonacreatedat
 
-class TipozonaSchema(ma.Schema):
+class TipozonaSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfssatectipozonaid', 'pfssatectipozonanombre','pfssatectipozonadetalle', 'pfssatectipozonaestado', 'pfssatectipozonacreatedat')
+        model = Tipozona
+
+    pfssatectipozonaid = ma.auto_field()
+    pfssatectipozonanombre = ma.auto_field()
+    pfssatectipozonadetalle = ma.auto_field()
+    pfssatectipozonaestado = ma.auto_field()
+    pfssatectipozonacreatedat = ma.auto_field()   
 
 tipozonaSchema = TipozonaSchema()
 tipozonaSchema = TipozonaSchema(many=True)
@@ -213,6 +286,8 @@ class Parroquia(db.Model):
     pfssatecparroquiaid = db.Column(db.Integer, primary_key=True)
     pfssatecparroquianombre = db.Column(db.String(150), nullable=False)
     pfssatecparroquiaimage = db.Column(db.String(300), nullable=False)
+    pfssatecparroquiadetalle = db.Column(db.String(120), nullable=False)
+    pfssatecparroquiaubicacion = db.Column(db.String(120), nullable=False)
     pfssatecparroquiacodigo = db.Column(db.String(120), nullable=False)
     pfssatecparroquiaestado = db.Column(db.String(1), nullable=True)
     pfssatecparroquiacreatedat = db.Column(db.String(11), nullable=True) 
@@ -223,16 +298,30 @@ class Parroquia(db.Model):
     pfssatectipozonaid = db.Column(db.Integer, db.ForeignKey('pfssatectipozona.pfssatectipozonaid',ondelete='CASCADE'), nullable=False)
     pfssatectipozona = db.relationship('Tipozona',backref=db.backref('pfssatecparroquia',lazy=True))
 
-    def __init__(self, pfssatecparroquianombre,pfssatecparroquiaimage, pfssatecparroquiacodigo,pfssatecparroquiaestado, pfssatecparroquiacreatedat):
+    def __init__(self, pfssatecparroquianombre,pfssatecparroquiaimage,pfssatecparroquiadetalle,pfssatecparroquiaubicacion, pfssatecparroquiacodigo,pfssatecparroquiaestado, pfssatecparroquiacreatedat, pfssateccantonid, pfssatectipozonaid):
         self.pfssatecparroquianombre = pfssatecparroquianombre
         self.pfssatecparroquiaimage = pfssatecparroquiaimage
+        self.pfssatecparroquiadetalle = pfssatecparroquiadetalle
+        self.pfssatecparroquiaubicacion = pfssatecparroquiaubicacion
         self.pfssatecparroquiacodigo = pfssatecparroquiacodigo
         self.pfssatecparroquiaestado = pfssatecparroquiaestado
         self.pfssatecparroquiacreatedat = pfssatecparroquiacreatedat
+        self.pfssateccantonid = pfssateccantonid
+        self.pfssatectipozonaid = pfssatectipozonaid
 
-class ParroquiaSchema(ma.Schema):
+class ParroquiaSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('pfssatecparroquiaid', 'pfssatecparroquianombre','pfssatecparroquiaimage', 'pfssatecparroquiacodigo', 'pfssatecparroquiaestado' , 'pfssatecparroquiacreatedat', 'pfssateccantonid', 'pfssatectipozonaid')
+        model = Parroquia
+
+    pfssatecparroquiaid = ma.auto_field() 
+    pfssatecparroquianombre = ma.auto_field() 
+    pfssatecparroquiaimage = ma.auto_field() 
+    pfssatecparroquiadetalle = ma.auto_field() 
+    pfssatecparroquiaubicacion = ma.auto_field() 
+    pfssatecparroquiacodigo = ma.auto_field() 
+    pfssatecparroquiaestado = ma.auto_field() 
+    pfssatecparroquiacreatedat = ma.auto_field()  
+
 
 parroquiaSchema = ParroquiaSchema()
 parroquiaSchema = ParroquiaSchema(many=True)

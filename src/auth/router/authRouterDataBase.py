@@ -1,6 +1,6 @@
 from flask import Blueprint
 from src.migrate.migrate import initDB
 
-ardbm= Blueprint('ardbm', __name__)
+ardbsatec= Blueprint('ardbsatec', __name__)
 
-ardbm.route('/ardbm', methods=['GET'])(initDB)
+ardbsatec.route('/ardbsatec', methods=['GET'])(initDB)

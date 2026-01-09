@@ -10,7 +10,7 @@ from src.client.router.clientRouterStart import crs
 #----------
 #Router
 # Router DataBase 
-from src.auth.router.authRouterDataBase import ardbm
+from src.auth.router.authRouterDataBase import ardbsatec
 # Router Login 
 from src.auth.router.authRouterUserLoginIn import arulgn 
 from src.auth.router.authRouterUserLogout import araulgt
