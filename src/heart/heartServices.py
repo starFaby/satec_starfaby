@@ -24,6 +24,9 @@ from src.admin.service.adminServiceUser import AdminServiceUser
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 
+from src.client.service.clientServiceSatec import ClientServiceSatec
+from src.client.service.clientServiceParroquia import ClientServiceParroquia
+
 
 
 

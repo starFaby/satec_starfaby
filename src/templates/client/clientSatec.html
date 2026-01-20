@@ -5,9 +5,9 @@ Satec
 {% endblock%}
 {% block content %}
 <div class="container">
-    <div class="container">
+    <!--    <div class="container">
         <h1>Buscador Satec</h1>
-
+        <h2> satec: {{satecList}}</h2>
         <div class="mb-3">
             <label for="buscador" class="form-label">Buscar Canton o Ciudad:</label>
             <input class="form-control" type="text" id="buscador" placeholder="Escribe para filtrar canton o ciudad..." autocomplete="off">
@@ -15,9 +15,9 @@ Satec
 
         <div class="mb-3">
             <label for="paises" class="form-label">Selecciona un país:</label>
-            <select id="paises" size="2">
-                {% for pais in paises %}
-                <option value="{{ pais }}">{{ pais }}</option>
+            <select id="paises" >
+                {% for item in satecList %}
+                <option value="{{ item.pfssateccantonid }}">{{ item.pfssateccantonnombre }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -26,6 +26,63 @@ Satec
             <strong>País seleccionado:</strong>
             <span id="nombre-pais"></span>
         </div>
+    </div>-->
+    <h1><i class="fas fa-search"></i> Búsqueda Inteligente</h1>
+    <p class="subtitle">Autocompletado desde base de datos con Flask</p>
+
+    <div class="search-container">
+        <label for="producto" class="search-label">Buscar Producto:</label>
+        <div class="search-box">
+            <input type="text" id="producto" placeholder="Escribe para buscar productos..." autocomplete="off">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="suggestions" id="suggestions"></div>
+        </div>
     </div>
+
+    <div class="selected-product" id="selectedProduct">
+        <div class="selected-title">
+            <i class="fas fa-check-circle"></i> Producto Seleccionado
+        </div>
+        <div class="selected-details">
+            <div class="detail-item">
+                <div class="detail-label">Nombre</div>
+                <div class="detail-value" id="detailNombre">-</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Categoría</div>
+                <div class="detail-value" id="detailCategoria">-</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Precio</div>
+                <div class="detail-value" id="detailPrecio">-</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">¿Cómo funciona?</div>
+        <div class="info-text">
+            <p>Este sistema realiza búsquedas en tiempo real consultando una base de datos SQLite:</p>
+            <ul>
+                <li>Escribe en el campo de búsqueda para obtener sugerencias</li>
+                <li>Los resultados se filtran por nombre o categoría</li>
+                <li>Haz clic en una sugerencia para seleccionarla</li>
+                <li>Los datos se cargan dinámicamente usando AJAX</li>
+            </ul>
+            <p><strong>Tecnologías:</strong> Flask, SQLite, JavaScript, AJAX, HTML5, CSS3</p>
+        </div>
+    </div>
+    <section>
+        <label for="exampleDataList" class="form-label">Datalist example</label>
+        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+        <datalist id="datalistOptions">
+            {% for item in satecList %}
+            <option value="{{ item.pfssateccantonid }}">{{ item.pfssateccantonnombre }}</option>
+            {% endfor %}
+        </datalist>
+    </section>
 </div>
+
 {% endblock %}
