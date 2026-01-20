@@ -194,6 +194,7 @@ class CapitalSchema(ma.SQLAlchemySchema):
     pfssateccapitalcodigo = ma.auto_field()
     pfssateccapitalestado = ma.auto_field()
     pfssateccapitalcreatedat = ma.auto_field()
+    pfssatecprovinciaid = ma.auto_field()
 
 capitalSchema = CapitalSchema()
 capitalSchema = CapitalSchema(many=True)
@@ -214,10 +215,11 @@ class Canton(db.Model):
     pfssateccantonestado = db.Column(db.String(1), nullable=True)
     pfssateccantoncreatedat = db.Column(db.String(11), nullable=True) 
 
-    pfssateccapitalid = db.Column(db.Integer, db.ForeignKey('pfssateccapital.pfssateccapitalid',ondelete='CASCADE'), nullable=False)
-    pfssateccapital = db.relationship('Capital',backref=db.backref('pfssateccanton',lazy=True))
+    pfssatecprovinciaid = db.Column(db.Integer, db.ForeignKey('pfssatecprovincia.pfssatecprovinciaid',ondelete='CASCADE'), nullable=False)
+    pfssatecprovincia = db.relationship('Provincia',backref=db.backref('pfssateccanton',lazy=True))
 
-    def __init__(self, pfssateccantonnombre,pfssateccantonimage, pfssateccantoncodigo,pfssateccantondetalle,pfssateccantonubicacion,pfssateccantonestado, pfssateccantoncreatedat, pfssateccapitalid):
+
+    def __init__(self, pfssateccantonnombre,pfssateccantonimage, pfssateccantoncodigo,pfssateccantondetalle,pfssateccantonubicacion,pfssateccantonestado, pfssateccantoncreatedat, pfssatecprovinciaid):
         self.pfssateccantonnombre = pfssateccantonnombre
         self.pfssateccantonimage = pfssateccantonimage
         self.pfssateccantondetalle = pfssateccantondetalle
@@ -225,7 +227,7 @@ class Canton(db.Model):
         self.pfssateccantoncodigo = pfssateccantoncodigo
         self.pfssateccantonestado = pfssateccantonestado
         self.pfssateccantoncreatedat = pfssateccantoncreatedat
-        self.pfssateccapitalid = pfssateccapitalid
+        self.pfssatecprovinciaid = pfssatecprovinciaid
 
 class CantonSchema(ma.SQLAlchemySchema):
     class Meta:
@@ -239,6 +241,7 @@ class CantonSchema(ma.SQLAlchemySchema):
     pfssateccantoncodigo = ma.auto_field()
     pfssateccantonestado = ma.auto_field()
     pfssateccantoncreatedat = ma.auto_field()
+    pfssatecprovinciaid = ma.auto_field()
 
 cantonSchema = CantonSchema()
 cantonSchema = CantonSchema(many=True)
@@ -321,6 +324,8 @@ class ParroquiaSchema(ma.SQLAlchemySchema):
     pfssatecparroquiacodigo = ma.auto_field() 
     pfssatecparroquiaestado = ma.auto_field() 
     pfssatecparroquiacreatedat = ma.auto_field()  
+    pfssateccantonid = ma.auto_field()  
+    pfssatectipozonaid = ma.auto_field()  
 
 
 parroquiaSchema = ParroquiaSchema()
