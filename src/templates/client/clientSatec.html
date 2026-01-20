@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Satec
+{% endblock%}
+{% block content %}
+<div class="container">
+    <div class="container">
+        <h1>Buscador Satec</h1>
+
+        <div class="mb-3">
+            <label for="buscador" class="form-label">Buscar Canton o Ciudad:</label>
+            <input class="form-control" type="text" id="buscador" placeholder="Escribe para filtrar canton o ciudad..." autocomplete="off">
+        </div>
+
+        <div class="mb-3">
+            <label for="paises" class="form-label">Selecciona un país:</label>
+            <select id="paises" size="2">
+                {% for pais in paises %}
+                <option value="{{ pais }}">{{ pais }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div id="info-pais" class="pais-seleccionado" style="display: none;">
+            <strong>País seleccionado:</strong>
+            <span id="nombre-pais"></span>
+        </div>
+    </div>
+</div>
+{% endblock %}

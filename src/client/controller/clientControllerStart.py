@@ -17,19 +17,7 @@ class ClientControllerStart:
         
         return render('index.html')
     
-    def onGetClientControllerCarnet():
-        context = {
-            'vmcarnet': True,
-            'vmpresabg': False
-        }
-        return render('index.html', **context)
     
-    def onGetClientControllerPresentacionAbg():
-        context = {
-            'vmcarnet': False, 
-            'vmpresabg': True 
-        }
-        return render('index.html', **context)
 
 
 
