@@ -31,6 +31,8 @@ def apprun():
     #----------Client----------
     app.register_blueprint(crs)
     app.register_blueprint(crstc)
+    app.register_blueprint(crparr)
+    app.register_blueprint(crcnt)
 
 
     return app

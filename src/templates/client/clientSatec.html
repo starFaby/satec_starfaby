@@ -5,84 +5,67 @@ Satec
 {% endblock%}
 {% block content %}
 <div class="container">
-    <!--    <div class="container">
-        <h1>Buscador Satec</h1>
-        <h2> satec: {{satecList}}</h2>
-        <div class="mb-3">
-            <label for="buscador" class="form-label">Buscar Canton o Ciudad:</label>
-            <input class="form-control" type="text" id="buscador" placeholder="Escribe para filtrar canton o ciudad..." autocomplete="off">
-        </div>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Autocompletado con Combo Box en Flask</h1>
 
-        <div class="mb-3">
-            <label for="paises" class="form-label">Selecciona un país:</label>
-            <select id="paises" >
-                {% for item in satecList %}
-                <option value="{{ item.pfssateccantonid }}">{{ item.pfssateccantonnombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div id="info-pais" class="pais-seleccionado" style="display: none;">
-            <strong>País seleccionado:</strong>
-            <span id="nombre-pais"></span>
-        </div>
-    </div>-->
-    <h1><i class="fas fa-search"></i> Búsqueda Inteligente</h1>
-    <p class="subtitle">Autocompletado desde base de datos con Flask</p>
-
-    <div class="search-container">
-        <label for="producto" class="search-label">Buscar Producto:</label>
-        <div class="search-box">
-            <input type="text" id="producto" placeholder="Escribe para buscar productos..." autocomplete="off">
-            <div class="search-icon">
-                <i class="fas fa-search"></i>
+        <!-- Ejemplo 1: Autocompletado Simple -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>1. Búsqueda de Usuarios</h3>
+            </div> 
+            <div class="card-body">
+                <div class="autocomplete-container">
+                    <input type="text" id="buscarCanton" class="autocomplete-input form-control"
+                        placeholder="Escribe para buscar canton...">
+                    <div id="sugerenciasCantones" class="autocomplete-list"></div>
+                </div>
+                <div class="mt-3">
+                    <strong>Seleccionado:</strong>
+                    <span id="CantonSeleccionado" class="text-muted">Ninguno</span>
+                </div>
             </div>
-            <div class="suggestions" id="suggestions"></div>
+        </div>
+
+        <!-- Ejemplo 2: Autocompletado con Categorías -->
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3>2. Búsqueda de Productos</h3>
+            </div>
+            <div class="card-body">
+                <div class="autocomplete-container">
+                    <input type="text" id="buscarProducto" class="autocomplete-input form-control"
+                        placeholder="Buscar productos por nombre o categoría...">
+                    <div id="sugerenciasProductos" class="autocomplete-list"></div>
+                </div>
+                <div class="mt-3">
+                    <strong>Seleccionado:</strong>
+                    <span id="productoSeleccionado" class="text-muted">Ninguno</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información -->
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h3>Información</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Características implementadas:</strong></p>
+                <ul>
+                    <li>Búsqueda en tiempo real</li>
+                    <li>Navegación con teclas (↑ ↓ Enter)</li>
+                    <li>Selección con clic del ratón</li>
+                    <li>Límite de resultados</li>
+                    <li>Feedback visual</li>
+                    <li>Conexión con backend Flask</li>
+                </ul>
+                <div class="alert alert-warning">
+                    <strong>Nota:</strong> Los datos se envían al backend cuando presionas Enter o haces clic en una
+                    opción.
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="selected-product" id="selectedProduct">
-        <div class="selected-title">
-            <i class="fas fa-check-circle"></i> Producto Seleccionado
-        </div>
-        <div class="selected-details">
-            <div class="detail-item">
-                <div class="detail-label">Nombre</div>
-                <div class="detail-value" id="detailNombre">-</div>
-            </div>
-            <div class="detail-item">
-                <div class="detail-label">Categoría</div>
-                <div class="detail-value" id="detailCategoria">-</div>
-            </div>
-            <div class="detail-item">
-                <div class="detail-label">Precio</div>
-                <div class="detail-value" id="detailPrecio">-</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="info-box">
-        <div class="info-title">¿Cómo funciona?</div>
-        <div class="info-text">
-            <p>Este sistema realiza búsquedas en tiempo real consultando una base de datos SQLite:</p>
-            <ul>
-                <li>Escribe en el campo de búsqueda para obtener sugerencias</li>
-                <li>Los resultados se filtran por nombre o categoría</li>
-                <li>Haz clic en una sugerencia para seleccionarla</li>
-                <li>Los datos se cargan dinámicamente usando AJAX</li>
-            </ul>
-            <p><strong>Tecnologías:</strong> Flask, SQLite, JavaScript, AJAX, HTML5, CSS3</p>
-        </div>
-    </div>
-    <section>
-        <label for="exampleDataList" class="form-label">Datalist example</label>
-        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-        <datalist id="datalistOptions">
-            {% for item in satecList %}
-            <option value="{{ item.pfssateccantonid }}">{{ item.pfssateccantonnombre }}</option>
-            {% endfor %}
-        </datalist>
-    </section>
 </div>
 
 {% endblock %}

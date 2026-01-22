@@ -4,9 +4,4 @@ from src.heart.heartServices import *
 class ClientControllerSatec:
 
     def onGetClientControllerSatec():
-        satecList = ClientServiceSatec.ongetClientServiceSatec()
-
-        context = {
-                    'satecList':satecList
-                }
-        return render('client/clientSatec.html', **context)
+        return render('client/clientSatec.html')

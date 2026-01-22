@@ -38,8 +38,9 @@ from src.admin.controller.adminControllerUsers import AdminControllerUser
 #------------------
 # CONTROLLER CLIENT 
 #------------------
-from src.admin.controller.adminControllerUsers import AdminControllerUser
 from src.client.controller.clientControllerSatec import ClientControllerSatec
+from src.client.controller.clientControllerParroquia import ClientControllerParroquia
+from src.client.controller.clientControllerCanton import ClientControllerCanton
 
 
 #----------
