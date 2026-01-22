@@ -33,13 +33,20 @@ class Autocomplete {
             const response = await fetch(`${this.endpoint}?q=${encodeURIComponent(termino)}`);
 
             const resultados = await response.json();
-
+            
             this.mostrarResultados(resultados);
+
         } catch (error) {
             console.error('Error en la búsqueda:', error);
         }
     }
     
+    mostrarParroquias(resultados){
+        for (let i = 0; i < resultados.length; i++) {
+            const id = resultados[i];
+        }
+    }
+
     mostrarResultados(resultados) {
         
         if (resultados.length === 0) {
@@ -53,6 +60,9 @@ class Autocomplete {
         this.list.innerHTML = '';
 
         resultados.forEach((resultado, index) => {
+
+            const idProvincia =document.getElementById("idProvincia");
+            idProvincia.textContent = resultado.id;
             
             const item = document.createElement('div');
             item.className = 'autocomplete-item';
@@ -70,7 +80,7 @@ class Autocomplete {
 
     }
 
-    seleccionarIdCanton(idCanton){
+    seleccionarIdParroquia(idCanton){
         print('idCanton')
         print(idCanton)
         print('idCanton')
@@ -165,4 +175,3 @@ class Autocomplete {
         }
     }
 }
-export default Autocomplete;

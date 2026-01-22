@@ -3,7 +3,14 @@ from src.heart.heartUtil import *
 from src.heart.heartServices import *
 class ClientControllerParroquia:
 
-    def onGetClientControllerParroquia():
-        ParroquiaList = ClientServiceParroquia.ongetClientServiceParroquia()
-
-        return ParroquiaList
+    
+    def onGetClientControllerParroquiaModalListView():
+                parroquiaList = ClientServiceParroquia.ongetClientServiceParroquia()
+                context = {
+                        "listViewParroquia": True,
+                        "parroquiaList": parroquiaList
+                }
+                try: 
+                        return render("client/clientCanton.html", **context)
+                except SQLAlchemyError as e:
+                        return render('errors/error500.html', e) 

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% import 'client/modal/clientModalParroquia.html' as cmparroquialist %}
+{% block title %}
+{{ super() }}
+Satec
+{% endblock%}
+{% block content %}
+<div class="container">
+    {% if listViewParroquia is true %}
+    {{ cmparroquialist.adminModalParroquia("Registro de Usuarios",parroquiaList) }}
+    {% endif %}
+    <hr>
+    <div class="well text-center display-3 m-2">Consulta General</div>
+    {% if cantonList != 0 : %}
+    <div class="row">
+        <div class="col-8">
+            <strong class="display-6">Buscar Por: </strong><span class="display-6">{{ tag }}</span>
+        </div>
+        <div class="col-4">
+            <form action="" method="post" autocomplete="off">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="tag" id="tag" placeholder="Nombre..." />
+                    </div>
+                    <div class="col-6" align="left">
+                        <input type="submit" value="Search" class="form-control btn btn-primary " name="">
+                    </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        {% for item in cantonList %}
+        <div class="col-md-3 ">
+            <a href="{{ url_for('crparr.onGetClientControllerParroquiaModalListView') }}" >
+                <div class="card borderHover" style="width: 20rem; margin: 5px;">
+                    <span class="ribbon display-3 text-center">{{item.pfssateccantonnombre}}</span>
+                    <div class="card-header">
+                        <div>
+                            <span class="pull-lefht">{{item.pfssatecprovincianombre}}</span>
+                            <span class="pull-right">{{item.pfssateccapitalnombre}}</span>
+                        </div>
+                    </div>
+                    <img style="width: 100%; height:100px ;" class="card-img-top" src="" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"></h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-center">SATEC</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <h2 class="text-center" style="padding: 30px; font-size: 10vw ;">NO EXISTE CATEGORIAS</h2>
+    </div>
+    {% endif %}
+</div>
+{% block custom_scripts %}
+{% if (listViewParroquia is true) %}
+<script>
+    window.onload = function () {
+        $("#modparroquia").modal("show");
+    }
+</script>
+{% endif %}
+{% endblock %}
+{% endblock %}

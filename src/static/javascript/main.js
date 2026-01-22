@@ -1,7 +1,7 @@
 import Index from "./index.js"
 import NavbarDesplazamiento from "./navbar.js"
 import Comentario from "./btnComentario.js"
-import Autocomplete from "./satec.js"
+// import Autocomplete from "./satec.js"
 /** eventos */
 import "./caracteresDispon.js"
 
@@ -17,7 +17,7 @@ $(document).ready(function () {
     /** Comentario */
     const auxComenatrio = new Comentario()
     auxComenatrio.viewComentario()
-
+    /*
     // Ejemplo 1: Autocompletado de usuarios
     const autocompleteUsuarios = new Autocomplete(
         'buscarCanton',
@@ -31,8 +31,5 @@ $(document).ready(function () {
         'sugerenciasProductos',
         '/buscar_productos'
     );
-    document.addEventListener('DOMContentLoaded', e => {
-        $('#input-url').autocomplete()
-    }, false);
-    
+    */
 })

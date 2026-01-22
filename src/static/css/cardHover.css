@@ -1,0 +1,5 @@
+.borderHover:hover{
+    border-style: solid;
+    border-color: #000;
+    cursor: pointer;
+}
