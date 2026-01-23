@@ -31,7 +31,7 @@ Satec
     <div class="row">
         {% for item in cantonList %}
         <div class="col-md-3 ">
-            <a href="{{ url_for('crparr.onGetClientControllerParroquiaModalListView') }}" >
+            <a href="{{ url_for('crparr.onGetClientControllerParroquiaModalListView', id=item.pfssateccantonid) }}" >
                 <div class="card borderHover" style="width: 20rem; margin: 5px;">
                     <span class="ribbon display-3 text-center">{{item.pfssateccantonnombre}}</span>
                     <div class="card-header">
@@ -40,7 +40,7 @@ Satec
                             <span class="pull-right">{{item.pfssateccapitalnombre}}</span>
                         </div>
                     </div>
-                    <img style="width: 100%; height:100px ;" class="card-img-top" src="" alt="Card image cap">
+                    <img style="width: 100%; height:100px ;" class="card-img-top" src="https://res.cloudinary.com/dqpcafsbb/image/upload/v1769131710/noimage_fy4iax.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title text-center"></h5>
                         <p class="card-text"></p>

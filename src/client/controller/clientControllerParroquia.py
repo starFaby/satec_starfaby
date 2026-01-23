@@ -3,9 +3,8 @@ from src.heart.heartUtil import *
 from src.heart.heartServices import *
 class ClientControllerParroquia:
 
-    
-    def onGetClientControllerParroquiaModalListView():
-                parroquiaList = ClientServiceParroquia.ongetClientServiceParroquia()
+        def onGetClientControllerParroquiaModalListView(id):
+                parroquiaList = ClientServiceParroquia.ongetClientServiceParroquia(id)
                 context = {
                         "listViewParroquia": True,
                         "parroquiaList": parroquiaList
