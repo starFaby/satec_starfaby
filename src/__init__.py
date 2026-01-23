@@ -33,6 +33,7 @@ def apprun():
     app.register_blueprint(crstc)
     app.register_blueprint(crparr)
     app.register_blueprint(crcnt)
+    app.register_blueprint(crparrg)
 
 
     return app
